@@ -49,6 +49,7 @@ function loadMemos() {
   // 예전에 저장한 메모에는 tags가 없을 수 있어서 빈 배열을 넣어줍니다.
   return parsedMemos.map((memo) => ({
     ...memo,
+    createdAt: memo.createdAt || "",
     tags: Array.isArray(memo.tags) ? memo.tags : []
   }));
 }
@@ -136,6 +137,14 @@ function renderMemos() {
     const title = document.createElement("h3");
     title.textContent = memo.title;
 
+    const date = document.createElement("time");
+    date.className = "memo-date";
+    date.textContent = formatDate(memo.createdAt);
+
+    if (memo.createdAt) {
+      date.dateTime = memo.createdAt;
+    }
+
     const content = document.createElement("p");
     content.textContent = memo.content;
 
@@ -165,9 +174,27 @@ function renderMemos() {
     deleteButton.addEventListener("click", () => deleteMemo(memo.id));
 
     actions.append(editButton, deleteButton);
-    memoCard.append(title, content, tags, actions);
+    memoCard.append(title, date, content, tags, actions);
     memoList.append(memoCard);
   });
+}
+
+function formatDate(dateText) {
+  if (!dateText) {
+    return "작성일 없음";
+  }
+
+  const date = new Date(dateText);
+
+  if (Number.isNaN(date.getTime())) {
+    return "작성일 없음";
+  }
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}.${month}.${day}`;
 }
 
 function parseTags(tagsText) {

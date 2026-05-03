@@ -337,6 +337,18 @@ button.secondary:hover,
   word-break: break-word;
 }
 
+.memo-date {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 8px;
+  border: 1px dashed rgba(47, 43, 37, 0.42);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.55);
+}
+
 .memo-card p {
   margin-bottom: 16px;
   color: #514a43;
