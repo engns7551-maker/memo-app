@@ -1,0 +1,465 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #2f2b27;
+  --muted: #756f66;
+  --paper: #fffdf6;
+  --paper-line: rgba(145, 164, 188, 0.28);
+  --soft-pink: #ffd9df;
+  --soft-yellow: #fff1b8;
+  --soft-blue: #dff2ff;
+  --soft-green: #dcf4d8;
+  --accent: #ef7d78;
+  --shadow: 0 18px 40px rgba(91, 75, 55, 0.16);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 16px 16px, rgba(238, 155, 155, 0.28) 0 3px, transparent 4px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.55) 0 1px, transparent 1px),
+    #f8eadb;
+  background-size: 88px 88px, 28px 28px, 28px 28px, auto;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: -1;
+  font-size: 88px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+body::before {
+  content: "✦";
+  top: 28px;
+  right: 7vw;
+  color: #f5a3a8;
+  transform: rotate(12deg);
+}
+
+body::after {
+  content: "●";
+  bottom: 54px;
+  left: 5vw;
+  color: #b9ddff;
+}
+
+.app {
+  width: min(980px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.app-header {
+  position: relative;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding: 8px 6px;
+}
+
+.app-header::after {
+  content: "📌";
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 26px;
+  background: #fff6be;
+  box-shadow: 0 8px 18px rgba(122, 93, 45, 0.16);
+  transform: rotate(9deg);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 5px 12px;
+  border: 2px solid #2f2b27;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: #2f2b27;
+  background: #ffffff;
+  box-shadow: 3px 3px 0 #ffcfda;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  font-family: "Segoe Print", "Comic Sans MS", "Malgun Gothic", cursive;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 52px;
+  line-height: 1.1;
+  text-shadow: 3px 3px 0 #ffe5a8;
+}
+
+h2 {
+  margin-bottom: 18px;
+  font-size: 23px;
+}
+
+.editor,
+.memo-area {
+  position: relative;
+  margin-bottom: 26px;
+  border: 2px solid #312b25;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.editor {
+  padding: 34px 30px 28px;
+  background:
+    linear-gradient(90deg, transparent 0 48px, rgba(239, 125, 120, 0.28) 48px 50px, transparent 50px),
+    repeating-linear-gradient(to bottom, var(--paper) 0 34px, var(--paper-line) 35px 36px);
+}
+
+.editor::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 17px;
+  width: 14px;
+  height: calc(100% - 36px);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, #c8d4df 0 4px, transparent 5px) 0 0 / 14px 42px;
+  opacity: 0.75;
+}
+
+.editor::after,
+.memo-area::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 110px;
+  height: 30px;
+  background: rgba(255, 225, 164, 0.76);
+  border: 1px solid rgba(115, 92, 55, 0.16);
+  transform: translateX(-50%) rotate(-2deg);
+  box-shadow: 0 4px 10px rgba(92, 74, 47, 0.08);
+}
+
+.memo-area {
+  padding: 28px;
+  background:
+    linear-gradient(rgba(129, 167, 196, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 167, 196, 0.14) 1px, transparent 1px),
+    #fffefa;
+  background-size: 22px 22px;
+}
+
+form,
+.memo-toolbar,
+.memo-list,
+.empty-message {
+  position: relative;
+  z-index: 1;
+}
+
+label {
+  display: block;
+  margin: 14px 0 7px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 2px solid #302b25;
+  border-radius: 14px;
+  padding: 13px 15px;
+  font: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 4px 4px 0 rgba(47, 43, 37, 0.12);
+}
+
+textarea {
+  min-height: 156px;
+  resize: vertical;
+  line-height: 1.75;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.88) 0 30px, rgba(145, 164, 188, 0.26) 31px 32px);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9a9185;
+}
+
+input:focus,
+textarea:focus {
+  outline: 3px solid rgba(239, 125, 120, 0.32);
+  border-color: var(--accent);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+button {
+  min-height: 43px;
+  border: 2px solid #2f2b27;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 800;
+  color: #2f2b27;
+  background: var(--soft-yellow);
+  box-shadow: 3px 4px 0 #2f2b27;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+button:hover {
+  background: #ffe68c;
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 4px 6px 0 #2f2b27;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0 #2f2b27;
+}
+
+button.secondary,
+.edit-button {
+  background: var(--soft-blue);
+}
+
+button.secondary:hover,
+.edit-button:hover {
+  background: #c9eaff;
+}
+
+.delete-button {
+  background: var(--soft-pink);
+}
+
+.delete-button:hover {
+  background: #ffc1cc;
+}
+
+.memo-toolbar {
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 340px);
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.memo-toolbar h2 {
+  margin-bottom: 0;
+}
+
+.memo-toolbar input {
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.memo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.memo-card {
+  position: relative;
+  padding: 28px 20px 20px;
+  border: 2px solid rgba(47, 43, 37, 0.88);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0) 0 30px, rgba(157, 167, 179, 0.25) 31px 32px),
+    #fff7bf;
+  box-shadow: 9px 10px 0 rgba(47, 43, 37, 0.13);
+  transform: rotate(-1.2deg);
+}
+
+.memo-card:nth-child(2n) {
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0) 0 30px, rgba(157, 167, 179, 0.22) 31px 32px),
+    #dff2ff;
+  transform: rotate(1deg);
+}
+
+.memo-card:nth-child(3n) {
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0) 0 30px, rgba(157, 167, 179, 0.22) 31px 32px),
+    #ffe1e7;
+  transform: rotate(-0.4deg);
+}
+
+.memo-card::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 86px;
+  height: 24px;
+  border: 1px solid rgba(113, 90, 54, 0.16);
+  background: rgba(255, 238, 185, 0.76);
+  transform: translateX(-50%) rotate(3deg);
+  box-shadow: 0 4px 8px rgba(87, 65, 42, 0.08);
+}
+
+.memo-card h3 {
+  margin: 0 0 10px;
+  font-family: "Segoe Print", "Comic Sans MS", "Malgun Gothic", cursive;
+  font-size: 19px;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.memo-card p {
+  margin-bottom: 16px;
+  color: #514a43;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.memo-tags {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 17px;
+}
+
+.memo-tags:empty {
+  display: none;
+}
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 5px 9px;
+  border: 2px solid rgba(47, 43, 37, 0.88);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #2f2b27;
+  background: #dcf4d8;
+  box-shadow: 2px 2px 0 rgba(47, 43, 37, 0.14);
+  transform: rotate(-2deg);
+  word-break: break-word;
+}
+
+.tag-badge:nth-child(2n) {
+  background: #ffe1e7;
+  transform: rotate(2deg);
+}
+
+.tag-badge:nth-child(3n) {
+  background: #e9dcff;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-actions button {
+  min-height: 36px;
+  padding: 7px 13px;
+  font-size: 14px;
+  box-shadow: 2px 3px 0 #2f2b27;
+}
+
+.empty-message {
+  margin: 8px 0 0;
+  padding: 34px 18px;
+  color: #736b61;
+  text-align: center;
+  border: 2px dashed #d3ac87;
+  border-radius: 18px;
+  background:
+    linear-gradient(rgba(158, 189, 211, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(158, 189, 211, 0.18) 1px, transparent 1px),
+    rgba(255, 255, 255, 0.72);
+  background-size: 20px 20px;
+}
+
+.empty-message::before {
+  content: "✎";
+  display: block;
+  margin-bottom: 8px;
+  font-size: 34px;
+  color: #ef7d78;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .app {
+    width: min(100% - 20px, 980px);
+    padding: 20px 0 34px;
+  }
+
+  .app-header {
+    align-items: center;
+  }
+
+  .app-header::after {
+    width: 46px;
+    height: 46px;
+    font-size: 23px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .editor {
+    padding: 30px 18px 22px 24px;
+    border-radius: 18px;
+  }
+
+  .memo-area {
+    padding: 24px 16px;
+  }
+
+  .memo-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .memo-list {
+    grid-template-columns: 1fr;
+  }
+
+  .memo-card,
+  .memo-card:nth-child(2n),
+  .memo-card:nth-child(3n) {
+    transform: none;
+  }
+}

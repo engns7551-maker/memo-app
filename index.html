@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>간단 메모장</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Pocket Diary</p>
+        <h1>오늘의 작은 메모</h1>
+      </div>
+    </header>
+
+    <section class="editor" aria-labelledby="editor-title">
+      <h2 id="editor-title">새 메모 쓰기</h2>
+      <form id="memo-form">
+        <label for="memo-title">제목</label>
+        <input id="memo-title" type="text" placeholder="오늘 떠오른 제목" required>
+
+        <label for="memo-content">내용</label>
+        <textarea id="memo-content" rows="6" placeholder="잊고 싶지 않은 내용을 적어보세요" required></textarea>
+
+        <label for="memo-tags">태그</label>
+        <input id="memo-tags" type="text" placeholder="쉼표로 구분해요. 예: 공부, 아이디어, 코덱스">
+
+        <div class="form-actions">
+          <button id="save-button" type="submit">저장하기</button>
+          <button id="cancel-button" class="secondary hidden" type="button">수정 취소</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="memo-area" aria-labelledby="memo-list-title">
+      <div class="memo-toolbar">
+        <h2 id="memo-list-title">붙여둔 메모</h2>
+        <input id="search-input" type="search" placeholder="제목, 내용, 태그로 검색">
+      </div>
+
+      <p id="empty-message" class="empty-message">아직 붙여둔 메모가 없습니다. 첫 메모를 적어보세요.</p>
+      <div id="memo-list" class="memo-list"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
