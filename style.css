@@ -330,15 +330,20 @@ button.secondary:hover,
 }
 
 .memo-card h3 {
-  margin: 0 0 10px;
+  display: inline;
+  margin: 0;
   font-family: "Segoe Print", "Comic Sans MS", "Malgun Gothic", cursive;
-  font-size: 19px;
+  font-size: 21px;
+  font-weight: 800;
   line-height: 1.35;
+  color: #241f1b;
+  background: linear-gradient(transparent 58%, rgba(255, 221, 116, 0.82) 58%);
   word-break: break-word;
 }
 
 .memo-date {
   display: inline-block;
+  margin-top: 12px;
   margin-bottom: 10px;
   padding: 3px 8px;
   border: 1px dashed rgba(47, 43, 37, 0.42);
