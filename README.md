@@ -4,6 +4,10 @@ HTML, CSS, JavaScript로 만든 간단한 메모장 웹앱입니다.
 
 메모를 작성하고, 수정하고, 삭제할 수 있으며 태그와 검색 기능도 사용할 수 있습니다. 작성한 메모는 `localStorage`에 저장되어 브라우저를 새로고침해도 데이터가 유지됩니다.
 
+## Live Demo
+
+https://engns7551-maker.github.io/memo-app/
+
 ## 주요 기능
 
 - 메모 작성
