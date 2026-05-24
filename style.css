@@ -272,7 +272,14 @@ button.secondary:hover,
   grid-template-columns: 1fr minmax(220px, 340px);
   gap: 16px;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border: 2px dashed rgba(211, 172, 135, 0.72);
+  border-radius: 16px;
+  background:
+    linear-gradient(rgba(255, 246, 190, 0.68), rgba(255, 253, 246, 0.76)),
+    linear-gradient(90deg, rgba(129, 167, 196, 0.12) 1px, transparent 1px);
+  background-size: auto, 20px 20px;
 }
 
 .memo-toolbar h2 {
@@ -281,7 +288,9 @@ button.secondary:hover,
 
 .memo-toolbar input {
   border-radius: 999px;
+  border-color: rgba(47, 43, 37, 0.88);
   background: #ffffff;
+  box-shadow: 3px 3px 0 rgba(47, 43, 37, 0.16);
 }
 
 .memo-list {
@@ -497,6 +506,9 @@ button.secondary:hover,
 
   .memo-toolbar {
     grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 18px;
   }
 
   .memo-list {
